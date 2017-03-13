@@ -1,7 +1,7 @@
 {
   "name": "cloistered-kudu",
   "version": "1.0.0",
-  "description": "ToDo-List ",
+  "description": "To Do List ",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/helenyau0/cloistered-kudu.git"
   },
-  "author": "Helen Yau",
+  "author": "Helen Yau" "Ally Kendall",
   "license": "MIT ",
   "bugs": {
     "url": "https://github.com/helenyau0/cloistered-kudu/issues"

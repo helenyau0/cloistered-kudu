@@ -6,7 +6,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.static('views'))
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.get('/', function(req, res) {
+app.get('/', function(require, respond) {
   res.render(__dirname + '/views/index.html')
 
 })
