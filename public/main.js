@@ -1,5 +1,3 @@
-
-
 function strikeThrough() {
   var checkId = this.id.replace("checkId", "")
   var newLi = document.getElementById('li' + checkId)
@@ -10,6 +8,11 @@ function strikeThrough() {
   }
 }
 var totalItems = 0;
+
+
+function deleteOption(e) {
+  e.target.parentElement.removeChild(e.target);
+}
 
 function submitButton() {
   totalItems++
@@ -28,6 +31,7 @@ function submitButton() {
   var textNode = document.createTextNode(input)
   li.appendChild(checkBox)
   li.appendChild(textNode)
+  li.ondblclick = deleteOption
   li.contentEditable = 'true'
 
   var listItems = document.getElementById('listItems')
