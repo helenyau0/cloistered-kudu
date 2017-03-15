@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    link(rel='stylesheet', href='stylsheet.css')
+    title To Do List
+  body
+    h1
+      | To Do List
+      form(method="POST", action='/api/todos')
+        input(type='text', name='todo')
+        button(type='submit') add
+    ul#listItems
+      each val in allMyTodos
+        li= val.task
+    script(src='main.js')
