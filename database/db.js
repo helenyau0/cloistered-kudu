@@ -15,7 +15,7 @@ const getAllToDos = () => {
 }
 
 const getOneToDo = (id) => {
-  const psql = `SELECT task FROM todo WHERE id=$1`
+  const psql = `SELECT * FROM todo WHERE id=$1`
   return db.one(psql, [id])
 }
 
@@ -35,7 +35,7 @@ const removeItem = (id) => {
 }
 
 const updateItem = (id, task) => {
-   const psql = 'UPDATE todo SET task=$2 WHERE id=$1'
+  const psql = 'UPDATE todo SET task=$2 WHERE id=$1'
   return db.none(psql, [id, task])
 }
 

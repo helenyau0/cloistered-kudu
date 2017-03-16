@@ -20,7 +20,6 @@ html
             button(input='input') complete
         form(method="POST", action=`/delete/${val.id}`)
             button(input='input') delete
-        form(method="POST", action=`/update/${val.id}`)
-            input(type='text' name='todo')
+        a(href='/update/' + val.id) update
 
     script(src='main.js')

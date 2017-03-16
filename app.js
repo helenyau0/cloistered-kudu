@@ -2,12 +2,15 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const db = require('./database/db')
+const logger = require('morgan')
 const bodyParser = require('body-parser')
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
+app.use(logger('dev'))
+// app.use('/', 'index')
 app.use(express.static(path.join(__dirname, 'public')))
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({extended: true}))
 
 app.get('/', function(request, response ) {
   db.getAllToDos()
@@ -40,15 +43,23 @@ app.post('/delete/:id', function( req, res, next) {
   .catch(error => next (error))
 })
 
+app.get('/update/:id', function (req, res, next) {
+  const { id } = req.params
+  db.getOneToDo(id)
+  .then((val) => {
+    res.render('edit', {val})
+  }).catch(error => next (error))
+})
+
 app.post('/update/:id', function (req, res, next) {
   const { id } = req.params
-  const { todo } = req.body
-  console.log(todo);
-  db.updateItem(id, todo)
+  const { task } = req.body
+  db.updateItem(id, task)
   .then(() => {
     res.redirect('/')
   }).catch(error => next(error))
 })
+
 
 app.listen(3000, function() {
   console.log('listening on port:3000')
