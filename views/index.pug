@@ -20,6 +20,14 @@ html
             button(input='input') complete
         form(method="POST", action=`/delete/${val.id}`)
             button(input='input') delete
-        a(href='/update/' + val.id) update
+        button
+          a(href='/update/' + val.id) update
+        form(method='POST' action='/' + val.id + '/moveup')
+          button
+            a(href='/' + val.id + '/moveup') ^
+        form(method='POST' action='/' + val.id + '/movedown')
+          button
+            a(href='/' + val.id + '/movedown') v
+
 
     script(src='main.js')
