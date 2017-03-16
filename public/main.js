@@ -1,10 +1,14 @@
-function strikeThrough() {
-  var checkId = this.id.replace("checkId", "")
-  var newLi = document.getElementById('li' + checkId)
-  if(this.checked) {
-    newLi.style.textDecoration = 'line-through'
+function update(event) {
+  prompt('Fill me out');
+
+}
+
+
+function strikeThrough(event) {
+  if(target.clicked) {
+    style.textDecoration = 'line-through'
   } else {
-    newLi.style.textDecoration = "none";
+    todo.id.style.textDecoration = "none";
   }
 }
 
@@ -18,7 +22,7 @@ function submitButton() {
   totalItems++
   var input = document.getElementById('input').value
 
-  if(input != "") {
+  if(input != "" || input != " ") {
     var checkBox = document.createElement('input')
     checkBox.type = 'checkbox'
     checkBox.id = "checkId" + totalItems

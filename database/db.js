@@ -10,17 +10,33 @@ const db = pgp(connectionString)
 
 // all of my queries
 const getAllToDos = () => {
-  const psql = `SELECT * FROM todo`
+  const psql = `SELECT * FROM todo ORDER BY completed`
   return db.any(psql)
 }
-const addToDo = (task) => {
-  const psql = `INSERT INTO todo(task) VALUES($1) RETURNING *`
-  return db.oneOrNone(psql, task)
+
+const getOneToDo = (id) => {
+  const psql = `SELECT task FROM todo WHERE id=$1`
+  return db.one(psql, [id])
 }
 
-// const Todos = {
-//   getAllTodos: () => db.any( GET_ALL_TODOS, [] ),
-//   addTodo: ( newTask ) => db.one( ADD_TODO, [newTask]),
-// }
+const addToDo = (task) => {
+  const psql = `INSERT INTO todo(task) VALUES($1)`
+  return db.none(psql, [task])
+}
 
-module.exports = {getAllToDos:getAllToDos, addToDo:addToDo}
+const completed = (id) => {
+  const psql = `UPDATE todo SET completed = NOT completed WHERE id=$1`
+  return db.none(psql, [id])
+}
+
+const removeItem = (id) => {
+  const psql = `DELETE FROM todo WHERE id=$1`
+  return db.none(psql, [id])
+}
+
+const updateItem = (id, task) => {
+   const psql = 'UPDATE todo SET task=$2 WHERE id=$1'
+  return db.none(psql, [id, task])
+}
+
+module.exports = { getAllToDos, addToDo, completed, removeItem, getOneToDo, updateItem }

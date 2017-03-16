@@ -12,16 +12,42 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.get('/', function(request, response ) {
   db.getAllToDos()
   .then( allMyTodos => {
-    console.log('all my todos', allMyTodos);
     response.render('index', {allMyTodos})
   })
 })
 
 app.post('/api/todos', function (req, res, next) {
-  console.log('this is the body -->', req.body);
+  const { todo } = req.body
   db.addToDo(req.body.todo)
-    .then( () => res.redirect('/'))
-    .catch(error => next(error))
+  .then( () => res.redirect('/'))
+})
+
+app.post('/complete/:id', function (req, res, next) {
+  const { id } = req.params
+  db.completed(id)
+  .then(() => {
+    res.redirect('/')
+  })
+  .catch(error => next(error))
+})
+
+app.post('/delete/:id', function( req, res, next) {
+  const { id } = req.params
+  db.removeItem(id)
+  .then(() => {
+    res.redirect('/')
+  })
+  .catch(error => next (error))
+})
+
+app.post('/update/:id', function (req, res, next) {
+  const { id } = req.params
+  const { todo } = req.body
+  console.log(todo);
+  db.updateItem(id, todo)
+  .then(() => {
+    res.redirect('/')
+  }).catch(error => next(error))
 })
 
 app.listen(3000, function() {

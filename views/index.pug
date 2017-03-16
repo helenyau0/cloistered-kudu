@@ -7,9 +7,20 @@ html
     h1
       | To Do List
       form(method="POST", action='/api/todos')
-        input(type='text', name='todo')
-        button(type='submit') add
+        input(type='text', name='todo', placeholder='add item here')
+        button(input='input') add
     ul#listItems
       each val in allMyTodos
-        li= val.task
+        form(method='POST', action=`/complete/${val.id}`)
+          if !val.completed
+            li(id=val.id)=val.task
+            button(input='input') complete
+          else
+            li(id=val.id style='text-decoration: line-through')=val.task
+            button(input='input') complete
+        form(method="POST", action=`/delete/${val.id}`)
+            button(input='input') delete
+        form(method="POST", action=`/update/${val.id}`)
+            input(type='text' name='todo')
+
     script(src='main.js')
