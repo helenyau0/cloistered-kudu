@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS todo;
 
 CREATE TABLE IF NOT EXISTS todo(
   id SERIAL PRIMARY KEY,
-  task TEXT,
-  completed BOOLEAN DEFAULT false
+  task TEXT NOT NULL,
+  completed BOOLEAN DEFAULT false,
+  rank SERIAL
 );

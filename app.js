@@ -60,6 +60,26 @@ app.post('/update/:id', function (req, res, next) {
   }).catch(error => next(error))
 })
 
+app.all('/:id/moveup', function (req, res, next) {
+  const id = req.params
+  console.log('idpls', id);
+  db.moveUp(id)
+    .then(() => {
+      res.redirect('/')
+    })
+    .catch(error => next(error))
+})
+
+app.all('/:id/movedown', function (req, res, next) {
+  const id = req.params
+  db.moveDown(id)
+    .then(() => {
+      res.redirect('/')
+    })
+    .catch(error => next(error))
+})
+
+
 
 app.listen(3000, function() {
   console.log('listening on port:3000')
