@@ -21,8 +21,12 @@ app.get('/', function(request, response ) {
 
 app.post('/api/todos', function (req, res, next) {
   const { todo } = req.body
-  db.addToDo(req.body.todo)
+  Promise.all([
+    db.addToDo(req.body.todo),
+    db.addRank(req.body.todo)
+  ])
   .then( () => res.redirect('/'))
+  .catch(error => next(error))
 })
 
 app.post('/complete/:id', function (req, res, next) {

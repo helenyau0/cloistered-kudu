@@ -21,9 +21,12 @@ const getOneToDo = (id) => {
 
 const addToDo = (task) => {
   const psql = `INSERT INTO todo(task) VALUES($1)`
-  const rank = `SELECT id, task, completed, rank() OVER(ORDER BY id ASC) FROM todo`
-  return db.any(psql, [task], [rank])
+  return db.none(psql, [task])
+}
 
+const addRank = (todo) => {
+  const psql = `SELECT id, task, completed, rank() OVER(ORDER BY id ASC) FROM todo`
+  return db.any(psql, [todo])
 }
 
 const completed = (id) => {
@@ -44,10 +47,10 @@ const updateItem = (id, task) => {
 
 
 const swapRanks = (taskA, taskB) => {
-  const sqlA = `UPDATE todo SET rank=$4 WHERE id=$1`
+  const sqlA = `UPDATE todo SET rank=$2 WHERE id=$1`
   const varA = [taskA.id, taskB.rank]
 
-  const sqlB = `UPDATE todo SET rank=$4 WHERE id=$1`
+  const sqlB = `UPDATE todo SET rank=$2 WHERE id=$1`
   const varB = [taskB.id, taskA.rank]
 
   return Promise.all([
@@ -70,11 +73,11 @@ const moveTask = (direction, id) => {
 }
 
 const moveUp = (id) => {
-  return moveTask(1, id)
-}
-
-const moveDown = (id) => {
   return moveTask(-1, id)
 }
 
-module.exports = { getAllToDos, addToDo, completed, removeItem, getOneToDo, updateItem, moveTask, moveUp, moveDown, swapRanks }
+const moveDown = (id) => {
+  return moveTask(1, id)
+}
+
+module.exports = { getAllToDos, addToDo, completed, removeItem, getOneToDo, updateItem, moveTask, moveUp, moveDown, swapRanks, addRank }
