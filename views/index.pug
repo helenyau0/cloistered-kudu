@@ -2,16 +2,14 @@ doctype html
 html
   head
     link(rel='stylesheet', href='stylsheet.css')
-    link(rel="stylesheet"
-
     title To Do List
-  body.container-fluid
+  body
     h1
       | To Do List
       form(method="POST", action='/api/todos')
         input(type='text', name='todo', placeholder='add item here')
         button(input='input') add
-    ul#listItems.row
+    ul#listItems
       each val in allMyTodos
         form(method='POST', action=`/complete/${val.id}`)
           if !val.completed
@@ -30,3 +28,6 @@ html
         form(method='POST' action='/' + val.id + '/movedown')
           button
             a(href='/' + val.id + '/movedown') v
+
+
+    script(src='main.js')
