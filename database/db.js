@@ -73,11 +73,11 @@ const moveTask = (direction, id) => {
 }
 
 const moveUp = (id) => {
-  return moveTask(-1, id)
+  return moveTask(1, id)
 }
 
 const moveDown = (id) => {
-  return moveTask(1, id)
+  return moveTask(-1, id)
 }
 
 module.exports = { getAllToDos, addToDo, completed, removeItem, getOneToDo, updateItem, moveTask, moveUp, moveDown, swapRanks, addRank }
