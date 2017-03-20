@@ -63,11 +63,9 @@ const moveTask = (direction, id) => {
   return getAllToDos()
     .then(todo => {
       const taskA = todo.find(todo => todo.id === parseInt(id.id))
-      console.log('taskA', taskA);
       const oldRank = taskA.rank
       const newRank = oldRank + direction
       const taskB = todo.find(todo => todo.rank === newRank)
-      console.log('taskB', taskB);
       return swapRanks(taskA, taskB)
     })
 }

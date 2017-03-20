@@ -66,7 +66,6 @@ app.post('/update/:id', function (req, res, next) {
 
 app.all('/:id/moveup', function (req, res, next) {
   const id = req.params
-  console.log('idpls', id);
   db.moveUp(id)
     .then(() => {
       res.redirect('/')
