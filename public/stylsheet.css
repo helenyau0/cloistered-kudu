@@ -1,0 +1,21 @@
+h1 {
+  color: red;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin-left: 0;
+  width: 180px;
+}
+
+li {
+  border: 1px solid #eee;
+  background: #ccc;
+  padding: 5px 10px;
+  color: #000;
+}
+
+#buttons {
+  margin: 100px 0 0 40px;
+}

@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    link(rel='stylesheet', href='stylsheet.css')
+    link(rel="stylesheet"
+
+    title To Do List
+  body.container-fluid
+    h1
+      | To Do List
+      form(method="POST", action='/api/todos')
+        input(type='text', name='todo', placeholder='add item here')
+        button(input='input') add
+    ul#listItems.row
+      each val in allMyTodos
+        form(method='POST', action=`/complete/${val.id}`)
+          if !val.completed
+            li(id=val.id)=val.task
+            button(input='input') complete
+          else
+            li(id=val.id style='text-decoration: line-through')=val.task
+            button(input='input') complete
+        form(method="POST", action=`/delete/${val.id}`)
+            button(input='input') delete
+        button
+          a(href='/update/' + val.id) update
+        form(method='POST' action='/' + val.id + '/moveup')
+          button
+            a(href='/' + val.id + '/moveup') ^
+        form(method='POST' action='/' + val.id + '/movedown')
+          button
+            a(href='/' + val.id + '/movedown') v
