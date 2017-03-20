@@ -1,10 +1,13 @@
 {
   "name": "cloistered-kudu",
   "version": "1.0.0",
-  "description": "ToDo-List ",
+  "description": "To Do List ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "db:env": "echo DATABASE_URL = postgres://`whoami`@localhost:5432/cloisteredkudu >> .env",
+    "db:init": "psql cloisteredkudu < database/schema.sql",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +18,16 @@
   "bugs": {
     "url": "https://github.com/helenyau0/cloistered-kudu/issues"
   },
-  "homepage": "https://github.com/helenyau0/cloistered-kudu#readme"
+  "homepage": "https://github.com/helenyau0/cloistered-kudu#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "fs": "0.0.1-security",
+    "pg-promise": "^5.6.4",
+    "pug": "^2.0.0-beta11"
+  },
+  "devDependencies": {
+    "dotenv": "^4.0.0",
+    "morgan": "^1.8.1"
+  }
 }
